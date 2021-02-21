@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <time.h>
 
-void printStruct(const struct stat *p);
+void printStat(const struct stat *p);
 void printMode(mode_t mode);
 void printTime(time_t time);
 
@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
             continue;
         }
 
-        printStruct(&file_info);
+        printStat(&file_info);
         puts("");
     }
     return 0;
 }
 
-void printStruct(const struct stat *p)
+void printStat(const struct stat *p)
 {
     if(p == NULL)
         return;
