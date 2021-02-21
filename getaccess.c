@@ -1,4 +1,6 @@
+#include <errno.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
@@ -16,7 +18,12 @@ int main(int argc, char *argv[])
 
     for(int i = 1; i < argc; i++)
     {
-        stat(argv[i], &file_info);
+        if( stat(argv[i], &file_info) < 0)
+        {
+            fprintf(stderr, "File: %s\nstat(): %s\n", argv[i], strerror(errno));
+            continue;
+        }
+
         printStruct(&file_info);
         puts("");
     }
