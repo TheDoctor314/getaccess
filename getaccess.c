@@ -7,12 +7,19 @@ void printStruct(const struct stat *p);
 void printMode(mode_t mode);
 void printTime(time_t time);
 
-int main()
+int main(int argc, char *argv[])
 {
-    struct stat test;
-    stat("Makefile", &test);
+    if(argc == 1)
+        puts("getaccess: missing arguments\nUsage: getaccess file1 [file2 ...]");
 
-    printStruct(&test);
+    struct stat file_info;
+
+    for(int i = 1; i < argc; i++)
+    {
+        stat(argv[i], &file_info);
+        printStruct(&file_info);
+        puts("");
+    }
     return 0;
 }
 
